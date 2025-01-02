@@ -1,5 +1,6 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
     "java.completion.enabled": false,
-    "java.debug.settings.enableRunDebugCodeLens": false
+    "java.debug.settings.enableRunDebugCodeLens": false,
+    "java.compile.nullAnalysis.mode": "automatic"
 }
