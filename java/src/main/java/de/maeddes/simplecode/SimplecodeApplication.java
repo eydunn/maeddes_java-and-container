@@ -19,7 +19,7 @@ public class SimplecodeApplication {
 
 	org.slf4j.Logger logger = LoggerFactory.getLogger(SimplecodeApplication.class);
 
-	private String getInstanceId(){
+	private String getHostname(){
 
 		if(!hostname.equals("not_set")) return hostname;
 		return "probably not set";
@@ -27,25 +27,17 @@ public class SimplecodeApplication {
 	}
 
 	@GetMapping("/")
-	String helloABC(){
+	String hello(){
 
-		logger.info("Call to helloABC method on instance: " + getInstanceId());
-		return getInstanceId()+" Hello, Container people ! ";
-
-	}
-
-	@GetMapping("/new")
-	String newEndpoint(){
-
-		logger.info("Call to new method on instance: " + getInstanceId());
-		return " Hello, World ! ";
+		logger.info("Call to hello method on instance: " + getHostname());
+		return getHostname()+" Hello, Container people ! ";
 
 	}
 
 	@GetMapping("/fail")
 	String fail() {
 
-		logger.info("Call to failing method on instance: "+getInstanceId());
+		logger.info("Call to failing method on instance: "+getHostname());
 		System.exit(1);
 		return "fixed!";
 	}
