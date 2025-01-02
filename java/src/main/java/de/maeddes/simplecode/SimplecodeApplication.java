@@ -27,15 +27,15 @@ public class SimplecodeApplication {
 	}
 
 	@GetMapping("/")
-	String hello(){
+	String helloABCAB(){
 
-		logger.info("Call to hello method on instance: " + getHostname());
+		logger.info("Call to helloABC method on instance: " + getHostname());
 		return getHostname()+" Hello, Container people ! ";
 
 	}
 
 	@GetMapping("/fail")
-	String fail() {
+	String failABC() {
 
 		logger.info("Call to failing method on instance: "+getHostname());
 		System.exit(1);
