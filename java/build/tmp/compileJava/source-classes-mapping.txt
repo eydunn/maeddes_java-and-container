@@ -1,2 +1,0 @@
-de/maeddes/simplecode/SimplecodeApplication.java
- de.maeddes.simplecode.SimplecodeApplication
