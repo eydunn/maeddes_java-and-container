@@ -369,7 +369,7 @@ If it's not present use option 2.
 Option 1: 
 [source]
 ----
-./mvnw compile com.google.cloud.tools:jib-maven-plugin:3.3.2:dockerBuild -Dimage=java-app:jib
+./mvnw compile com.google.cloud.tools:jib-maven-plugin:3.4.4:dockerBuild -Dimage=java-app:jib -Djib.from.image=eclipse-temurin:21-jre
 ----
 
 In this case the *:dockerBuild* part will instruct the plugin to build to the local docker daemon.
@@ -380,14 +380,14 @@ If you have a docker account you can login and push directly to the docker hub u
 
 [source]
 ----
-./mvnw compile com.google.cloud.tools:jib-maven-plugin:3.3.2:build -Dimage=<docker_id>/java-app:jib
+./mvnw compile com.google.cloud.tools:jib-maven-plugin:3.4.4:build -Dimage=<docker_id>/java-app:jib -Djib.from.image=eclipse-temurin:21-jre
 ----
 
 Another option is to export the image directly to a tar. Use the following command.
 
 [source]
 ----
-./mvnw compile com.google.cloud.tools:jib-maven-plugin:3.3.2:buildTar -Dimage=java-app:jib
+./mvnw compile com.google.cloud.tools:jib-maven-plugin:3.4.4:buildTar -Dimage=java-app:jib -Djib.from.image=eclipse-temurin:21-jre
 ----
 
 You will see an output saying
@@ -400,6 +400,7 @@ docker load -i target/jib-image.tar
 ----
 
 ----
+not showing any more
 15bbc04e2cf6: Loading layer [==================================================>]  41.71MB/41.71MB
 7f270d883779: Loading layer [==================================================>]  16.82MB/16.82MB
 496ff124a7de: Loading layer [==================================================>]     213B/213B
@@ -444,10 +445,10 @@ docker history java-app:jib
 
 ----
 IMAGE          CREATED        CREATED BY                                      SIZE      COMMENT
-bafe5ced0d6f   51 years ago   jib-maven-plugin:3.1.4                          82B       jvm arg files
-<missing>      51 years ago   jib-maven-plugin:3.1.4                          2.37kB    classes
-<missing>      51 years ago   jib-maven-plugin:3.1.4                          1B        resources
-<missing>      51 years ago   jib-maven-plugin:3.1.4                          18.9MB    dependencies
+2275828677a8   N/A            jib-maven-plugin:3.4.4                          1.66kB    jvm arg files
+<missing>      N/A            jib-maven-plugin:3.4.4                          2.46kB    classes
+<missing>      N/A            jib-maven-plugin:3.4.4                          1B        resources
+<missing>      N/A            jib-maven-plugin:3.4.4                          23.1MB    dependencies
 ----
 
 Optional: Perform some small modifications in the code similar to the ones during the Dockerfile exercise.
@@ -463,8 +464,11 @@ You can add the following plugin to your pom.xml
 <plugin>
     <groupId>com.google.cloud.tools</groupId>
     <artifactId>jib-maven-plugin</artifactId>
-    <version>3.3.2</version>
+    <version>3.4.4</version>
     <configuration>
+        <from>
+            <image>eclipse-temurin:21-jre</image>
+        </from>       
         <to>
             <image>java-app:jib-v2.0</image>
         </to>
