@@ -1,6 +1,7 @@
 {
 	"name": "Java",
 	"image": "mcr.microsoft.com/devcontainers/base:bullseye",
+	"postCreateCommand": "(curl -sSL https://github.com/buildpacks/pack/releases/download/v0.36.0/pack-v0.36.0-linux.tgz | sudo tar -C /usr/local/bin/ --no-same-owner -xzv pack)",
 
 	"features": {
 		"ghcr.io/devcontainers/features/java:latest": {
@@ -11,6 +12,7 @@
 		"docker-in-docker": "latest",
 		"github-cli": "latest"
 	},
+
 	"customizations": {
 		"vscode": {
 			"extensions": [
@@ -25,5 +27,4 @@
 			]
 		}
 	}
-
 }
