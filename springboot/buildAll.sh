@@ -1,20 +1,31 @@
 #!/bin/bash
 
-# Loop through each file that starts with "Dockerfile"
+LOG_FILE="build.log"
+echo "🚀 Starting Docker builds..." > "$LOG_FILE"
+echo "Build started at: $(date)" >> "$LOG_FILE"
+echo "---------------------------------" >> "$LOG_FILE"
+
+# Loop through each Dockerfile
 for file in Dockerfile*; do
-  # Extract the tag by removing the "Dockerfile" prefix
   tag=${file#Dockerfile}
-  
-  # If the tag is empty (for the plain "Dockerfile"), use a default tag
-  if [[ -z "$tag" ]]; then
-    tag="default"
+  tag=${tag#-}
+  [[ -z "$tag" ]] && tag="default"
+
+  echo "🔧 Building Docker image with tag: $tag"
+  echo "Building $file as java-image:$tag" >> "$LOG_FILE"
+
+  if docker build -f "$file" -t "my-image:$tag" .; then
+    echo "✅ SUCCESS: $file built as java-image:$tag" >> "$LOG_FILE"
   else
-    # Remove any leading hyphen from the tag
-    tag=${tag#-}
+    echo "❌ FAILURE: $file failed to build" >> "$LOG_FILE"
   fi
 
-  # Build the Docker image with the appropriate tag
-  echo "Building Docker image with tag: $tag"
-  docker build -f "$file" -t "java-image:$tag" .
+  echo "---------------------------------" >> "$LOG_FILE"
 done
+
+# Add a final summary of built images to the log file
+echo "📦 Final Docker images list:" >> "$LOG_FILE"
+docker images >> "$LOG_FILE"
+
+echo "✅ Build process completed. Check $LOG_FILE for details."
 
