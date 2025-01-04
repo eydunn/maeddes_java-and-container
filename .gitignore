@@ -1,7 +1,9 @@
 # Compiled class file
 *.class
-target/
-students/
+**/target/
+
+tutorial_tmp
+
 
 **/.gradle
 .project
