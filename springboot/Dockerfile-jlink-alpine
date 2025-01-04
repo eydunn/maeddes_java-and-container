@@ -1,5 +1,5 @@
 
-FROM maven:3-eclipse-temurin-17 as build
+FROM maven:3-eclipse-temurin-21 as build
 RUN mkdir /usr/src/project
 COPY . /usr/src/project
 WORKDIR /usr/src/project
@@ -7,7 +7,7 @@ RUN --mount=type=cache,target=/root/.m2 mvn package -DskipTests
 RUN jar xf target/simplecode-0.0.1-SNAPSHOT.jar
 RUN jdeps --ignore-missing-deps -q  \
     --recursive  \
-    --multi-release 17  \
+    --multi-release 21  \
     --print-module-deps  \
     --class-path 'BOOT-INF/lib/*'  \
     target/simplecode-0.0.1-SNAPSHOT.jar > deps.info
@@ -20,7 +20,7 @@ RUN jlink \
     --output /myjre
     
 FROM alpine
-ENV JAVA_HOME /user/java/jdk17
+ENV JAVA_HOME /user/java/jdk21
 ENV PATH $JAVA_HOME/bin:$PATH
 COPY --from=build /myjre $JAVA_HOME
 RUN mkdir /project

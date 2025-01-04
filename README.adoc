@@ -23,7 +23,7 @@ Mandatory:
 
 Recommended:
 
-* A Java (17 or later) Development Kit for Java examples, e.g https://adoptopenjdk.net/
+* A Java (21 or later) Development Kit for Java examples, e.g https://adoptopenjdk.net/
 
 Optional:
 
@@ -66,9 +66,9 @@ java --version
 Should display output like (version might differ):
 
 ----
-openjdk 17.0.7 2023-04-18
-OpenJDK Runtime Environment (build 17.0.7+7-Ubuntu-0ubuntu120.04)
-OpenJDK 64-Bit Server VM (build 17.0.7+7-Ubuntu-0ubuntu120.04, mixed mode, sharing)
+openjdk 21.0.7 2023-04-18
+OpenJDK Runtime Environment (build 21.0.7+7-Ubuntu-0ubuntu120.04)
+OpenJDK 64-Bit Server VM (build 21.0.7+7-Ubuntu-0ubuntu120.04, mixed mode, sharing)
 ----
 
 == Dockerfile Exercises
@@ -128,7 +128,7 @@ cat Dockerfile-simple-ubuntu
 
 ----
 FROM ubuntu:22.04
-RUN apt update && apt install openjdk-17-jre-headless -y
+RUN apt update && apt install openjdk-21-jre-headless -y
 COPY target/simplecode-0.0.1-SNAPSHOT.jar /opt/app.jar
 CMD ["java","-jar","/opt/app.jar"]
 ----
@@ -228,7 +228,7 @@ docker images
 
 ----
 REPOSITORY     TAG                     IMAGE ID       CREATED          SIZE
-java-app     v-multistage-builder   816512fee0cd   17 seconds ago   291MB
+java-app     v-multistage-builder   816512fee0cd   21 seconds ago   291MB
 ----
 
 Perform a slight modification in the source code which does not affect the behaviour of the application.
@@ -643,7 +643,7 @@ Get an overview of the built Images
 You have now completed the core exercise.
 Feel free to do some modifications yourself.
 Suggestions:
-* Edit the pom.xml and alternate the Java version (8,11,17 have been tested).
+* Edit the pom.xml and alternate the Java version (8,11,21 have been tested).
 * Do minor or major code modifications and observe changes
 * Use dive to analyze the created images.
 
