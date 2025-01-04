@@ -1,0 +1,11 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Build Container",
+        "type": "shell",
+        "command": "docker build -t java-app:test -f springboot/Dockerfile-ultimate",
+        "problemMatcher": []
+      }
+    ]
+  }
