@@ -14,7 +14,7 @@ for file in Dockerfile*; do
   echo "🔧 Building Docker image with tag: $tag"
   echo "Building $file as java-image:$tag" >> "$LOG_FILE"
 
-  if docker build -f "$file" -t "my-image:$tag" .; then
+  if docker build -f "$file" -t "java-image:$tag" .; then
     echo "✅ SUCCESS: $file built as java-image:$tag" >> "$LOG_FILE"
   else
     echo "❌ FAILURE: $file failed to build" >> "$LOG_FILE"
