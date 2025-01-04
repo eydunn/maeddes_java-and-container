@@ -1,4 +1,4 @@
-FROM maven:3-eclipse-temurin-21 as build
+FROM maven:3-eclipse-temurin-21 AS build
 RUN mkdir /opt/app
 COPY src /opt/app/src
 COPY pom.xml /opt/app
@@ -19,7 +19,7 @@ RUN jlink \
     --no-man-pages \
     --output /myjre
 
-FROM eclipse-temurin:21-jre as extractor
+FROM eclipse-temurin:21-jre AS extractor
 RUN mkdir /opt/app
 WORKDIR /opt/app
 COPY --from=build /opt/app/target/simplecode-0.0.1-SNAPSHOT.jar application.jar
