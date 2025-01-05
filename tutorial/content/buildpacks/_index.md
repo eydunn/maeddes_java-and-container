@@ -1,6 +1,6 @@
 +++
 archetype = "home"
-title = "Java and Container tutorial"
+title = "Cloud-native Buildpacks"
 +++
 
 Hello Java and Container people!

@@ -1,6 +1,6 @@
 +++
 archetype = "home"
-title = "Welcome"
+title = "Multistage Dockerfiles"
 +++
 
 Hello Java and Container people!

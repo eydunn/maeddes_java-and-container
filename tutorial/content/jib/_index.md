@@ -1,6 +1,6 @@
 +++
 archetype = "home"
-title = "Java and Container tutorial"
+title = "Jib"
 +++
 
 Hello Java and Container people!
