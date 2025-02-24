@@ -58,3 +58,47 @@
    29  docker logs 5f3
    30  history 
    31  history >> /workspace/options-galore-container-build/history 
+ 46  java -Djarmode=tools -jar application.jar extract --layers --launcher
+   47  ls -ltr
+   48  ls -ltr application
+   49  cd application/
+   50  java org.springframework.boot.loader.JarLauncher
+   51  ls
+   52  cd application/
+   53  ls
+   54  org.springframework.boot.loader.JarLauncher
+   55  java org.springframework.boot.loader.JarLauncher
+   56  ls -ltr
+   57  cd ..
+   58  tree
+   59  java org.springframework.boot.loader.lanch.JarLauncher
+   60  ls 
+   61  cd application/
+   62  ls
+   63  cd ..
+   64  cd spring-boot-loader/
+   65  java org.springframework.boot.loader.lanch.JarLauncher
+   66  ls
+   67  java org.springframework.boot.loader.launch.JarLauncher
+   68  ls
+   69  cd ..
+   70  ls
+   71  cd ..
+   72  ls
+   73  cp -R application/dependencies/ ./
+   74  cp -R application/spring-boot-loader/ ./
+   75  cp -R application/snapshot-dependencies/ ./
+   76  cp -R application/application/ ./
+   77  java org.springframework.boot.loader.launch.JarLauncher
+   78  ls
+   79  cp -R application/spring-boot-loader/* ./
+   80  ls
+   81  cp -R application/application/* ./
+   82  cp -R application/snapshot-dependencies/* ./
+   83  cp -R application/dependencies/* ./
+   84  history
+   85  java org.springframework.boot.loader.launch.JarLauncher
+   86  wget https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/download/v2.8.0/opentelemetry-javaagent.jar
+   87  java -javaagent:./opentelemetry-javaagent.jar org.springframework.boot.loader.launch.JarLauncher
+   88  history
+   89  history > ../../tutorial_tmp/history_layers
