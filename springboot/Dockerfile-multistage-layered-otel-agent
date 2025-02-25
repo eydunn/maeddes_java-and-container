@@ -15,13 +15,15 @@ COPY --from=builder /opt/app/dependencies/ ./
 COPY --from=builder /opt/app/spring-boot-loader/ ./
 COPY --from=builder /opt/app/snapshot-dependencies/ ./
 COPY --from=builder /opt/app/application/ ./
-ADD https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar ./
 
 # Set OpenTelemetry agent as Java agent
-ENV JAVA_TOOL_OPTIONS="-javaagent:/app/opentelemetry-javaagent.jar"
-ENV OTEL_SERVICE_NAME="my-java-application"
+ENV JAVA_TOOL_OPTIONS="-javaagent:/opt/app/opentelemetry-javaagent.jar"
+ENV OTEL_SERVICE_NAME="java-application"
 ENV OTEL_TRACES_EXPORTER="otlp"
 ENV OTEL_METRICS_EXPORTER="otlp"
 ENV OTEL_LOGS_EXPORTER="otlp"
 
-ENTRYPOINT ["java","-javaagent:/application/opentelemetry-javaagent.jar","org.springframework.boot.loader.launch.JarLauncher"]
+ADD https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar ./
+
+ENTRYPOINT ["java","org.springframework.boot.loader.launch.JarLauncher"]
+#ENTRYPOINT ["java","-javaagent:/opt/app/opentelemetry-javaagent.jar","org.springframework.boot.loader.launch.JarLauncher"]
