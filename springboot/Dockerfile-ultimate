@@ -1,8 +1,7 @@
 FROM maven:3-eclipse-temurin-21 AS build
-RUN mkdir /opt/app
-COPY src /opt/app/src
-COPY pom.xml /opt/app
 WORKDIR /opt/app
+COPY src ./src
+COPY pom.xml .
 RUN --mount=type=cache,target=/root/.m2 mvn package -DskipTests
 RUN jar xf target/simplecode-0.0.1-SNAPSHOT.jar
 RUN jdeps --ignore-missing-deps -q  \
@@ -10,14 +9,15 @@ RUN jdeps --ignore-missing-deps -q  \
     --multi-release 21  \
     --print-module-deps  \
     --class-path 'BOOT-INF/lib/*'  \
-    target/simplecode-0.0.1-SNAPSHOT.jar > deps.info
+    target/*.jar > deps.info
 RUN jlink \
+    --verbose \
     --add-modules $(cat deps.info) \
     --strip-debug \
     --compress 2 \
     --no-header-files \
     --no-man-pages \
-    --output /myjre
+    --output /customjre
 
 FROM eclipse-temurin:21-jre AS extractor
 RUN mkdir /opt/app
@@ -26,9 +26,9 @@ COPY --from=build /opt/app/target/simplecode-0.0.1-SNAPSHOT.jar application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
 
 FROM ubuntu:jammy
-ENV JAVA_HOME /opt/java/jdk21
-ENV PATH $JAVA_HOME/bin:$PATH
-COPY --from=build /myjre $JAVA_HOME
+ENV JAVA_HOME=/opt/java/jdk21
+ENV PATH=$JAVA_HOME/bin:$PATH
+COPY --from=build /customjre $JAVA_HOME
 RUN mkdir /opt/app
 WORKDIR /opt/app
 COPY --from=extractor /opt/app/dependencies/ ./
