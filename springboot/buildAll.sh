@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LOG_FILE="build.log"
+LOG_FILE="container_build.log"
 echo "🚀 Starting Docker builds..." > "$LOG_FILE"
 echo "Build started at: $(date)" >> "$LOG_FILE"
 echo "---------------------------------" >> "$LOG_FILE"
