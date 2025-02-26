@@ -18,7 +18,7 @@ COPY --from=builder /opt/app/application/ ./
 ADD https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar ./
 
 # Set OpenTelemetry agent as Java agent
-ENV JAVA_TOOL_OPTIONS="-javaagent:/app/opentelemetry-javaagent.jar"
+ENV JAVA_TOOL_OPTIONS="-javaagent:/opt/app/opentelemetry-javaagent.jar"
 ENV OTEL_SERVICE_NAME="my-java-application"
 ENV OTEL_TRACES_EXPORTER="otlp"
 ENV OTEL_METRICS_EXPORTER="otlp"

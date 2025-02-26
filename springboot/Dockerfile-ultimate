@@ -35,4 +35,8 @@ COPY --from=extractor /opt/app/dependencies/ ./
 COPY --from=extractor /opt/app/spring-boot-loader/ ./
 COPY --from=extractor /opt/app/snapshot-dependencies/ ./
 COPY --from=extractor /opt/app/application/ ./
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+RUN chown -R appuser:appuser /opt/app
+USER appuser
+
 ENTRYPOINT ["java","-XX:+UseParallelGC","-XX:MaxRAMPercentage=75","org.springframework.boot.loader.launch.JarLauncher"]

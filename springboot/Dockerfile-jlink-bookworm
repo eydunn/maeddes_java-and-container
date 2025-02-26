@@ -20,7 +20,7 @@ RUN jlink \
     --no-man-pages \
     --output /customjre
     
-FROM debian:slim
+FROM debian:bookworm-slim
 COPY --from=build /customjre /opt/jre
 ENV JAVA_HOME=/opt/jre
 ENV PATH="$PATH:$JAVA_HOME/bin"
